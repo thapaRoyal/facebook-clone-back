@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 function DbConnect() {
   // Database connection
-  mongoose.connect(process.env.DATABASE_URL_ATLAS, {
+  mongoose.connect(process.env.DATABASE_URL_COMPASS, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
