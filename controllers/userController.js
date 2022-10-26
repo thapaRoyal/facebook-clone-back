@@ -15,14 +15,24 @@ exports.register = async (req, res) => {
       gender,
     } = req.body;
 
+    // validate email
     if (!validateEmail(email)) {
       return res.status(400).json({
         message: 'Invalid email address ',
       });
     }
 
-    console.log(validateEmail(email));
+    // check if exists
+    const check = await User.findOne({ email });
+    if (check) {
+      return res.status(400).json({
+        message: 'Email address already in use',
+      });
+    }
 
+    // console.log(validateEmail(email));
+
+    // save user
     const user = await new User({
       firstName,
       lastName,
