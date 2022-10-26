@@ -1,4 +1,4 @@
-const { validateEmail } = require('../helpers/validation');
+const { validateEmail, validateLength } = require('../helpers/validation');
 const User = require('../models/userModel');
 
 exports.register = async (req, res) => {
@@ -30,7 +30,24 @@ exports.register = async (req, res) => {
       });
     }
 
-    // console.log(validateEmail(email));
+    // validate length
+    if (!validateLength(firstName, 3, 30)) {
+      return res.status(400).json({
+        message: 'First name must be between 3 and 30 characters',
+      });
+    }
+
+    if (!validateLength(lastName, 3, 30)) {
+      return res.status(400).json({
+        message: 'Last name must be between 3 and 30 characters',
+      });
+    }
+
+    if (!validateLength(lastName, 6, 30)) {
+      return res.status(400).json({
+        message: 'password must be between 6 and 30 characters',
+      });
+    }
 
     // save user
     const user = await new User({
