@@ -39,15 +39,15 @@ exports.register = async (req, res) => {
     }
 
     // validate length
-    if (!validateLength(firstName, 3, 30)) {
+    if (!validateLength(firstName, 2, 30)) {
       return res.status(400).json({
-        message: 'First name must be between 3 and 30 characters',
+        message: 'First name must be between 2 and 30 characters',
       });
     }
 
-    if (!validateLength(lastName, 3, 30)) {
+    if (!validateLength(lastName, 2, 30)) {
       return res.status(400).json({
-        message: 'Last name must be between 3 and 30 characters',
+        message: 'Last name must be between 2 and 30 characters',
       });
     }
 
@@ -95,7 +95,7 @@ exports.register = async (req, res) => {
       lastName: user.lastName,
       token,
       verified: user.verified,
-      message: 'Register successful! Pleease ativate your email',
+      message: 'Register successful! Please activate your email',
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
